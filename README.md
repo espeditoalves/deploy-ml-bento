@@ -1,126 +1,68 @@
-# deploy-ml-bento
+# deploy-ml-bentoml 
 
-## Tools used in this project
-* [hydra](https://hydra.cc/): Manage configuration files - [article](https://mathdatasimplified.com/stop-hard-coding-in-a-data-science-project-use-configuration-files-instead/)
-* [pdoc](https://github.com/pdoc3/pdoc): Automatically create an API documentation for your project
-* [pre-commit plugins](https://pre-commit.com/): Automate code reviewing formatting
+Esse projeto foi um estudo desenvolvimento para implementar o deploy de um modelo machine learning usando bentoml, e publicando no heroku, todavia decidir por não publicar no heroku, e usar somente o streamlit para uma interação amizagavel com o modelo.
 
-* [Poetry](https://towardsdatascience.com/how-to-effortlessly-publish-your-python-package-to-pypi-using-poetry-44b305362f9f): Dependency management - [article](https://mathdatasimplified.com/poetry-a-better-way-to-manage-python-dependencies/)
+**PS**: Para implementar no streamlit não é necessário utilizar o `bentoml`.
 
+##  Project Structure
+`src`: consists of Python scripts
+`config`: consists of configuration files
+`data`: consists of data
+`processors`: consists of all scikit-learn's transformers used to process the new input
 
-## Project Structure
+## Configuração do Projeto usando Poetry
+
+### Clone o Repositório
+
+Clone este repositório específico (branch `bentoml_demo`):
 
 ```bash
-.
-├── config                      
-│   ├── main.yaml                   # Main configuration file
-│   ├── model                       # Configurations for training model
-│   │   ├── model1.yaml             # First variation of parameters to train model
-│   │   └── model2.yaml             # Second variation of parameters to train model
-│   └── process                     # Configurations for processing data
-│       ├── process1.yaml           # First variation of parameters to process data
-│       └── process2.yaml           # Second variation of parameters to process data
-├── data            
-│   ├── final                       # data after training the model
-│   ├── processed                   # data after processing
-│   └── raw                         # raw data
-├── docs                            # documentation for your project
-├── .gitignore                      # ignore files that cannot commit to Git
-├── Makefile                        # store useful commands to set up the environment
-├── models                          # store models
-├── notebooks                       # store notebooks
-│   ├── exploration
-│   │   └── .gitkeep
-│   ├── modeling
-│   │   └── .gitkeep
-│   ├── preprocessing
-│   │   └── .gitkeep
-│   └── reporting
-│       └── .gitkeep
-├── output                          # store outputs
-│   ├── figures
-│   │   └── .gitkeep
-│   ├── predictions
-│   │   └── .gitkeep
-│   └── reports
-│       └── .gitkeep
-├── .pre-commit-config.yaml         # configurations for pre-commit
-├── pyproject.toml                  # dependencies for poetry
-├── README.md                       # describe your project
-├── src                             # store source code
-│   ├── __init__.py                 # make src a Python module 
-│   ├── process.py                  # process data before training model
-│   ├── train_model.py              # train model
-│   └── utils.py                    # store helper functions
-└── tests                           # store tests
-    ├── __init__.py                 # make tests a Python module 
-    ├── test_process.py             # test functions for process.py
-    └── test_train_model.py         # test functions for train_model.py
+git clone --branch bentoml_demo https://github.com/khuyentran1401/customer_segmentation.git
+```
+## Configuração do Ambiente Virtual com Poetry
+
+### Criar um Ambiente Virtual
+
+Para criar um novo ambiente virtual Python usando Poetry, execute o seguinte comando:
+
+```bash
+poetry env use python3
 ```
 
-## Set up the environment
+## Ativar o Ambiente Virtual
+Para ativar o ambiente virtual recém-criado, use o comando:
 
-
-1. Install [Poetry](https://python-poetry.org/docs/#installation)
-2. Activate the virtual environment:
 ```bash
 poetry shell
 ```
-3. Install dependencies:
-- To install all dependencies from pyproject.toml, run:
+
+## Instalação das Dependências do Projeto
+
+Depois de configurar o ambiente virtual com Poetry, instale todas as dependências listadas no arquivo pyproject.toml (gerenciado pelo Poetry) com o comando:
+
 ```bash
 poetry install
 ```
-- To install only production dependencies, run:
-```bash
-poetry install --only main
-```
-- To install a new package, run:
-```bash
-poetry add <package-name>
-```
+## Para treinar o modelo use
+
+1. Ative o ambiente virtual 
+2. Rode o código **`main.py`**
+
+## Para fazer classificanção usando Bentoml
+
+1. Ative o ambiente virtual 
+2. Rode o código **`bentoml serve src.bentoml_app:service --reload`**
+3. Acesse o link indicado no terminal ou use: http://127.0.0.1:3000/
+
+## Para fazer classificanção usando Streamlit
+
+1. Ative o ambiente virtual 
+2. Rode o código **`streamlit run src/streamlit_app.py`**
+    > O link de acesso será fornecido ou abrirá automaticamente
 
 
-## View and alter configurations
-To view the configurations associated with a Pythons script, run the following command:
-```bash
-python src/process.py --help
-```
-Output:
-```yaml
-process is powered by Hydra.
 
-== Configuration groups ==
-Compose your configuration from those groups (group=option)
+## Ferramaentas usadas nesse projeto
+* [hydra](https://hydra.cc/): Gerencia arquivos de configuração - [article](https://mathdatasimplified.com/stop-hard-coding-in-a-data-science-project-use-configuration-files-instead/)
 
-model: model1, model2
-process: process1, process2
-
-
-== Config ==
-Override anything in the config (foo.bar=value)
-
-process:
-  use_columns:
-  - col1
-  - col2
-model:
-  name: model1
-data:
-  raw: data/raw/sample.csv
-  processed: data/processed/processed.csv
-  final: data/final/final.csv
-```
-
-To alter the configurations associated with a Python script from the command line, run the following:
-```bash
-python src/process.py data.raw=sample2.csv
-```
-
-## Auto-generate API documentation
-
-To auto-generate API document for your project, run:
-
-```bash
-make docs
-```
+* [Poetry](https://towardsdatascience.com/how-to-effortlessly-publish-your-python-package-to-pypi-using-poetry-44b305362f9f): Gerenciamento de dependências - [article](https://mathdatasimplified.com/poetry-a-better-way-to-manage-python-dependencies/)

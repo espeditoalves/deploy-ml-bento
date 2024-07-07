@@ -20,31 +20,25 @@ def get_best_k_cluster(pca_df: pd.DataFrame) -> pd.DataFrame:
 
     return k_best
 
-
 def get_clusters_model(
     pca_df: pd.DataFrame, k: int
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
 
     model = KMeans(n_clusters=k)
-
     # Fit model
     return model.fit(pca_df)
 
-
 def save_model(model):
+    print('## Modelo sendo salvo na pasta raiz BENTOML:')
     bentoml.sklearn.save_model("customer_segmentation_kmeans", model)
-    print('MODELO SALVO')
+    print('## Modelo SALVO')
 
 @hydra.main(config_path="../config", config_name="config")
 def segment(config: DictConfig) -> None:
-
     pca_df = pd.read_csv(config.final.path)
-
     k_best = get_best_k_cluster(pca_df)
     model = get_clusters_model(pca_df, k_best)
-
     save_model(model)
-
 
 if __name__ == '__main__':
     segment()

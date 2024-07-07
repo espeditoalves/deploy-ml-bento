@@ -1,6 +1,6 @@
 import bentoml
 import pandas as pd
-from bentoml.io import NumpyNdarray, JSON
+from bentoml.io import NumpyNdarray, JSON, PandasDataFrame
 import numpy as np
 from pydantic import BaseModel
 import pickle
@@ -30,8 +30,6 @@ def load_pca():
     except Exception as e:
         print(f"Erro ao carregar PCA: {e}")
         return None
-
-
 
 # Carrega o modelo
 model = bentoml.sklearn.get("customer_segmentation_kmeans:latest").to_runner()
@@ -67,9 +65,6 @@ def predict(data: Customer) -> np.array:
 
     # Predição
     result = model.predict.run(pca_df)
+    print(f'Classificação bentom_app: {np.array(result)}')
+    print('---'*10)
     return np.array(result)
-
-print('----- Processamento iniciado -------' )
-# # Chamada para testar a função predict
-result = predict(Customer())
-print(result)

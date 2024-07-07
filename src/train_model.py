@@ -1,21 +1,35 @@
-"""
-This is the demo code that uses hydra to access the parameters in under the directory config.
-
-Author: Khuyen Tran
-"""
-
 import hydra
-from omegaconf import DictConfig
+from omegaconf import DictConfig, OmegaConf
+
+from process_data import process_data
+from segment import segment
 
 
-@hydra.main(config_path="../config", config_name="main", version_base="1.2")
-def train_model(config: DictConfig):
-    """Function to train the model"""
+@hydra.main(config_path="../config", config_name="config")
+def main(config: DictConfig):
 
-    print(f"Train modeling using {config.data.processed}")
-    print(f"Model used: {config.model.name}")
-    print(f"Save the output to {config.data.final}")
+    if config.flow == "all":
+        print('--- Tratamentos dos dados de treino INICIADOS ---')
+        process_data(config)
+        print('--- Tratamentos dos dados de treino FINALIZADOS ---')
+        
+        print('--- Treinamento do modelo INICIADO ---')
+        segment(config)
+        print('--- Treinamento do modelo FINALIZADO ---')
+
+    elif config.flow == "process_data":
+        print('--- Tratamentos dos dados de treino INICIADOS ---')
+        process_data(config)
+        print('--- Tratamentos dos dados te treino FINALIZADOS ---')
+
+    elif config.flow == "segment":
+        print('--- SOMENTE Treinamento do modelo INICIADO ---')
+        segment(config)
+        print('--- Treinamento do modelo FINALIZADO ---')
+
+    else:
+        print("flow not found")
 
 
 if __name__ == "__main__":
-    train_model()
+    main()

@@ -99,23 +99,20 @@ def process_data(config: DictConfig):
     # Scale data
     scaler = get_scaler(df)
     pickle.dump(scaler, open("processors/scaler.pkl", "wb"))
-
+    print('Scaler: SALVO')
 
     df = scale_features(df, scaler)
-    print('##'*20)
-    print(f"Shape df: {df.shape}")
 
     # Reduce dimension
     pca = get_pca_model(df)
     pickle.dump(pca, open("processors/PCA.pkl", "wb"))
+    print('PCA : SALVO')
 
     pca_df = reduce_dimension(df, pca)
-    print(f"Shape pca_df: {pca_df.shape}")
-    print('##'*20)
 
     # Save processed data
     pca_df.to_csv(config.final.path, index=False)
 
 
 if __name__ == "__main__":
-    process_data()
+    process_data() 
