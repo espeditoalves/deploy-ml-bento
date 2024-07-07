@@ -1,0 +1,14 @@
+
+## Onde os modelos ficam salvos no bentoml?
+Ficam salvos na pasta raiz do bentoml
+pasta: C:\Users\esped\bentoml\models
+
+## Como listas os modelos salvos:
+comando: bentoml models list
+
+## Carregando o serviço bentoml
+Original: bentoml serve src/bentoml_app_pandas.py:service --reload
+Correto:  bentoml serve src.bentoml_app_pandas.py:service --reload
+
+## Qual é o link de acesso ao serviço bentoml?
+http://127.0.0.1:3000/

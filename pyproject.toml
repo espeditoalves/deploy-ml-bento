@@ -4,10 +4,19 @@ name = "deploy-ml-bento"
 version = "0.1.0"
 description = "Este projeto tem o objetivo de desenvolver o deploy de um modelos"
 authors = ["Espedito Ferreira Alves"]
+package-mode = false  # Desativa o empacotamento do projeto, utilizando o Poetry apenas para gerenciamento de dependências
 
 [tool.poetry.dependencies]
 python = "^3.9"
 hydra-core = "^1.1.1"
+pandas = "^2.2.2"
+scikit-learn = "^1.5.1"
+bentoml = "^1.2.19"
+matplotlib = "^3.9.1"
+yellowbrick = "^1.5"
+streamlit = "1.10.0"
+nest-asyncio = "^1.6.0"
+numpy = "^2.0.0"
 
 [tool.poetry.dev-dependencies]
 pdoc3 = "^0.10.0"

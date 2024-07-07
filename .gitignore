@@ -97,3 +97,6 @@ data/*/*
 
 # Notebooks
 # notebooks/*
+
+# Ignorar o arquivo poetry.lock
+poetry.lock
