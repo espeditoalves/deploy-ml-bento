@@ -5,10 +5,10 @@ Esse projeto foi um estudo desenvolvimento para implementar o deploy de um model
 **PS**: Para implementar no streamlit não é necessário utilizar o `bentoml`.
 
 ##  Project Structure
-`src`: consists of Python scripts
-`config`: consists of configuration files
-`data`: consists of data
-`processors`: consists of all scikit-learn's transformers used to process the new input
+- `src`: consists of Python scripts
+- `config`: consists of configuration files
+- `data`: consists of data
+- `processors`: consists of all scikit-learn's transformers used to process the new input
 
 ## Configuração do Projeto usando Poetry
 
@@ -17,23 +17,7 @@ Esse projeto foi um estudo desenvolvimento para implementar o deploy de um model
 Clone este repositório específico (branch `bentoml_demo`):
 
 ```bash
-git clone --branch bentoml_demo https://github.com/khuyentran1401/customer_segmentation.git
-```
-## Configuração do Ambiente Virtual com Poetry
-
-### Criar um Ambiente Virtual
-
-Para criar um novo ambiente virtual Python usando Poetry, execute o seguinte comando:
-
-```bash
-poetry env use python3
-```
-
-## Ativar o Ambiente Virtual
-Para ativar o ambiente virtual recém-criado, use o comando:
-
-```bash
-poetry shell
+git clone https://github.com/espeditoalves/deploy-ml-bento.git
 ```
 
 ## Instalação das Dependências do Projeto
@@ -43,10 +27,20 @@ Depois de configurar o ambiente virtual com Poetry, instale todas as dependênci
 ```bash
 poetry install
 ```
+
+## Ativar o Ambiente Virtual
+Para ativar o ambiente virtual recém-criado, use o comando:
+
+```bash
+poetry shell
+```
+
 ## Para treinar o modelo use
 
-1. Ative o ambiente virtual 
-2. Rode o código **`main.py`**
+1. Baixe o conjunto de dados em: https://www.kaggle.com/datasets/imakash3011/customer-personality-analysis
+2. Salve o conjunto de dados em `.data/raw`
+3. O nome do arquivo deve ser: 'marketing_campaign.csv'
+4. Com o ambiente virtual ativo rode o código **`sr/train_model.py`**
 
 ## Para fazer classificanção usando Bentoml
 
